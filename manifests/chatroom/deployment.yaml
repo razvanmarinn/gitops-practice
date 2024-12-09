@@ -45,6 +45,22 @@ spec:
             periodSeconds: 5
             timeoutSeconds: 5
             failureThreshold: 5
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-data-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-data-pvc
+  namespace: chatroom
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
@@ -90,6 +106,22 @@ spec:
             periodSeconds: 5
             timeoutSeconds: 3
             failureThreshold: 5
+      volumes:
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: redis-data-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-data-pvc
+  namespace: chatroom
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
@@ -120,7 +152,7 @@ spec:
     spec:
       containers:
         - name: chatroom
-          image: razvan1y/chatroom:latest
+          image: your-chatroom-image:latest
           ports:
             - containerPort: 8080
           envFrom:
@@ -148,6 +180,6 @@ metadata:
   name: chatroom-env
   namespace: chatroom
 data:
-  POSTGRES_USER: cGFzc3dvcmQ=  # base64 encoded 'razvan'
-  POSTGRES_PASSWORD: MTIzNA==  # base64 encoded '1234'
-  POSTGRES_DB: Y2hhdHJvb20=  # base64 encoded 'chatroom'
+  POSTGRES_USER: cGFzc3dvcmQ= 
+  POSTGRES_PASSWORD: MTIzNA== 
+  POSTGRES_DB: Y2hhdHJvb20=
