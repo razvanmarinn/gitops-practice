@@ -152,7 +152,7 @@ spec:
     spec:
       containers:
         - name: chatroom
-          image: your-chatroom-image:latest
+          image: razvan1y/chatroom:latest
           ports:
             - containerPort: 8080
           envFrom:
