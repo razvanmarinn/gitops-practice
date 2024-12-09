@@ -1,3 +1,2 @@
 resources:
   - chatroom/deployment.yaml
-  - chatroom/service.yaml
