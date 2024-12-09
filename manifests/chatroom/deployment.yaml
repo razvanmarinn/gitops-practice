@@ -155,12 +155,19 @@ spec:
           image: razvan1y/chatroom:latest
           ports:
             - containerPort: 8080
-          envFrom:
-            - secretRef:
-                name: chatroom-env
-          dependsOn:
-            - postgres
-            - redis
+          env:
+            - name: POSTGRES_USERNAME
+              value: "razvan"
+            - name: POSTGRES_PASSWORD
+              value: "1234"
+            - name: POSTGRES_NAME
+              value: "chatroom"
+            - name: POSTGRES_HOST
+              value: "postgres"
+            - name: REDIS_HOST
+              value: "redis"
+            - name: REDIS_PORT
+              value: "6379"
 ---
 apiVersion: v1
 kind: Service
@@ -174,12 +181,3 @@ spec:
     - port: 8080
       targetPort: 8080
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: chatroom-env
-  namespace: chatroom
-data:
-  POSTGRES_USER: cGFzc3dvcmQ= 
-  POSTGRES_PASSWORD: MTIzNA== 
-  POSTGRES_DB: Y2hhdHJvb20=
