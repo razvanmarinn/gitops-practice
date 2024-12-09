@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatroom
+  labels:
+    app: chatroom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatroom
+  template:
+    metadata:
+      labels:
+        app: chatroom
+    spec:
+      containers:
+        - name: chatroom
+          image: alpine:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: POSTGRES_HOST
+              value: postgres
+            - name: RABBITMQ_HOST
+              value: rabbitmq
