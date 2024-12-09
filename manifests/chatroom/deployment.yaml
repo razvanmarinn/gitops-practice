@@ -17,6 +17,7 @@ spec:
       containers:
         - name: chatroom
           image: alpine:latest
+          command: ["sleep", "3600"] 
           ports:
             - containerPort: 8080
           env:
