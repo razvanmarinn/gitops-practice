@@ -152,7 +152,7 @@ spec:
     spec:
       containers:
         - name: chatroom
-          image: razvan1y/chatroom:v0.1
+          image: razvan1y/chatroom:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
